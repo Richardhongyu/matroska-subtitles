@@ -5,26 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Matroska Subtitles</title>
   <script src="../../dist/matroska-subtitles.min.js"></script>
-  <script src="stream-http.min.js"></script>
+<!--  <script src="../../dist/bbs.js"></script>-->
+<!--  <script src="https://unpkg.com/blob-to-stream@1.0.3/index.min.js"></script>-->
+<!--  unpkg.com/react@16.7.0/umd/react.production.min.js-->
+<!--  <script src="stream-http.min.js"></script>-->
+<!--  <script src="stream.js" ></script>-->
+<!--  <script src="../../dist/bs.min.js"></script>-->
+<!--  <script src="test.js"></script>-->
+  <script src="../../node_modules/blob-to-stream" type="module"></script>
+<!--  <script src="../../node_modules/stream/"></script>-->
   <script>
-    console.log(MatroskaSubtitles)
-    const parser = new MatroskaSubtitles.SubtitleParser()
+    // blob
+    // var blob_to = require('../../node_modules/blob-to-stream')
+    // ReadableStreamReader
+    // import Stream from 'stream'
+    // a()
+    // blobToStream()
+    // blob
+    // httpStream()
+    function onInputFileChange(){
+      // str
+      // import Stream from 'stream'
+      // console.log(MatroskaSubtitles)
+      // Readable()
 
-    // first an array of subtitle track information is emitted
-    parser.once('tracks', (tracks) => console.log(tracks))
+      let file = document.getElementById('input').files[0]
+      const parser = new MatroskaSubtitles.SubtitleParser()
 
-    // afterwards each subtitle is emitted
-    parser.on('subtitle', (subtitle, trackNumber) =>
-      console.log('Track ' + trackNumber + ':', subtitle))
+      // first an array of subtitle track information is emitted
+      parser.once('tracks', (tracks) => console.log(tracks))
 
-    parser.on('file', file => console.log('file:', file))
+      // afterwards each subtitle is emitted
+      // parser.on('subtitle', (subtitle, trackNumber) =>
+      //         console.log('Track ' + trackNumber + ':', subtitle))
 
-    httpStream.get('../../tests/matroska-test-files/test_files/test5.mkv', res => {
-      res.pipe(parser)
-    })
+      parser.on('file', file => console.log('file:', file))
+
+
+
+      // filecreateReadStream
+      // const blob = new bl
+
+      // file.stream()
+      let file_stream = file.stream()
+      console.log(file_stream.pipe(parser))
+      // console.log(file.stream().pipe(parser))
+      // stre
+      // var a = new Stream(file.stream())
+      // var src = new ReadableStream();
+      // src.readable = true;
+      // src.readable
+      // a.pipe(parser)
+      // console.log(a.pi)
+      // var url = URL.createObjectURL(file);
+
+      // console.log(url);
+    //   httpStream.get('../../../chives_vue_v2/tests/files/test1.mkv', res => {
+    //     console.log(res)
+    //     res.pipe(parser)
+    //   })
+    }
+
   </script>
 </head>
 <body>
-
+  <input type="file" id = "input" accept="*" onchange="onInputFileChange()" />
 </body>
 </html>
